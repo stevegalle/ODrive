@@ -306,6 +306,7 @@ void Encoder::sample_now() {
         } break;
 
         case MODE_SPI_ABS_AMS:
+        case MODE_SPI_ABS_AMSU:
         case MODE_SPI_ABS_CUI:
         {
             // Do nothing
@@ -375,6 +376,11 @@ void Encoder::abs_spi_cb(){
                 abs_spi_pos_updated_ = true;
             }
         } break;
+        case MODE_SPI_ABS_AMSU: {
+            auto rawVal = abs_spi_dma_rx_[0];
+            pos_abs_ = rawVal & 0x3FFF;
+            abs_spi_pos_updated_ = true;
+        } break;
         case MODE_SPI_ABS_AEAT: {
             pos_abs_ = abs_spi_dma_rx_[0];
             abs_spi_pos_updated_ = true;
@@ -443,6 +449,7 @@ bool Encoder::update() {
         } break;
         
         case MODE_SPI_ABS_AMS:
+        case MODE_SPI_ABS_AMSU:
         case MODE_SPI_ABS_CUI: 
         case MODE_SPI_ABS_AEAT: {
             if (abs_spi_pos_updated_ == false && abs_spi_pos_init_once_) {

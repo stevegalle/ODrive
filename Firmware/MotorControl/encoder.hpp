@@ -27,6 +27,7 @@ public:
         MODE_SPI_ABS_CUI = 0x100,
         MODE_SPI_ABS_AMS = 0x101,
         MODE_SPI_ABS_AEAT = 0x102,
+        MODE_SPI_ABS_AMSU = 0x103,
     };
     const uint32_t MODE_FLAG_ABS = 0x100;
 
